@@ -12,7 +12,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "es2018",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "./lib",
     "baseUrl": "./src",
     "incremental": true,
     "esModuleInterop": true,
