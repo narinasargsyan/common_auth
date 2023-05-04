@@ -1,17 +1,19 @@
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
+
 dotenv.config();
 
-import db from "../../db//models";
-
 class AuthService {
-
+  public redis: any;
+ constructor(redis) {
+   this.redis = redis
+ }
   async getTokenFromRedis(key: string) {
-    return await db.redis.getAsync(key);
+    return await this.redis.getAsync(key);
   }
 
   async setTokenToRedis(key: string, payload: any, expiresIn: number) {
-    db.redis.set(key, JSON.stringify(payload), "EX", expiresIn);
+    this.redis.set(key, JSON.stringify(payload), "EX", expiresIn);
   }
 
   async signToken(payload: any, secretKey: string, expiresIn: number, keyName: string) {
@@ -38,4 +40,4 @@ class AuthService {
   }
 }
 
-export = new AuthService();
+export = AuthService;
